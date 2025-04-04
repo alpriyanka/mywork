@@ -987,10 +987,15 @@
     </main>
     
     <!-- Audio Player (Updated to use Google Drive) -->
-    <audio id="birthdaySong" loop style="display:none;">
-        <source src="https://docs.google.com/uc?export=open&id=1sCFmWVzN7O8qSDQiued5lR0fD5c6ErtQ" type="audio/mpeg">
-        Your browser doesn't support the audio element.
-    </audio>
+    <!-- This will show an embedded Google Drive player -->
+    <iframe 
+      src="https://drive.google.com/file/d/1sCFmWVzN7O8qSDQiued5lR0fD5c6ErtQ/preview" 
+      width="300" 
+      height="60"
+     frameborder="0"
+     style="border:none;background:transparent;"
+     allow="autoplay"
+    ></iframe>
     
     <!-- Floating Music Player -->
     <div id="musicPlayer" style="display:none;">
