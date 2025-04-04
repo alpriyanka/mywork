@@ -987,10 +987,10 @@
     </main>
     
     <!-- Floating Music Player -->
-<div id="musicPlayer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(10, 14, 23, 0.8); padding: 10px 15px; border-radius: 50px; border: 1px solid var(--primary); box-shadow: var(--neon-glow); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
-    <div style="color:var(--light);font-family:'Orbitron';">Surya's Song ♫</div>
-    <iframe src="https://drive.google.com/file/d/1sCFmWVzN7O8qSDQiued5lR0fD5c6ErtQ/preview" width="300" height="60" frameborder="0" style="border:none; border-radius: 20px;"></iframe>
-</div>
+    <div id="musicPlayer" style="display: none;">
+        <div style="color:var(--light);font-family:'Orbitron';">Surya's Song ♫</div>
+        <iframe src="https://drive.google.com/file/d/1sCFmWVzN7O8qSDQiued5lR0fD5c6ErtQ/preview" width="300" height="60" frameborder="0" style="border:none; border-radius: 20px;"></iframe>
+    </div>
     
     <!-- Footer -->
     <footer>
@@ -1112,18 +1112,6 @@
             // Set current year
             document.getElementById('year').textContent = new Date().getFullYear();
             
-            // Initialize audio player with error handling
-            const audioPlayer = document.getElementById('birthdaySong');
-            audioPlayer.volume = 0.5;
-            
-            // Add error listener
-            audioPlayer.addEventListener('error', function() {
-                console.error("Error loading audio:", audioPlayer.error);
-                const player = document.getElementById('musicPlayer');
-                player.insertAdjacentHTML('beforeend', 
-                    '<div style="color:red;font-size:0.8rem;">Could not load song</div>');
-            });
-            
             // Show music player after page loads
             setTimeout(() => {
                 document.getElementById('musicPlayer').style.display = 'flex';
@@ -1203,28 +1191,6 @@
                 }, 5000);
             }
         }
-        
-        // Music player controls with better error handling
-        const audioPlayer = document.getElementById('birthdaySong');
-        const playBtn = document.getElementById('playBtn');
-        
-        playBtn.addEventListener('click', async () => {
-            try {
-                if (audioPlayer.paused) {
-                    await audioPlayer.play();
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                } else {
-                    audioPlayer.pause();
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                }
-            } catch (error) {
-                console.error("Playback failed:", error);
-                // Show a message to the user
-                const player = document.getElementById('musicPlayer');
-                player.insertAdjacentHTML('beforeend', 
-                    '<div style="color:red;font-size:0.8rem;">Could not play audio</div>');
-            }
-        });
         
         // Generate random colors for confetti
         function getRandomColor() {
