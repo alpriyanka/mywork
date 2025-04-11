@@ -131,6 +131,22 @@
             transition: all 0.3s ease;
         }
         
+        nav a i {
+            font-size: 1.1rem;
+        }
+        
+        .fullscreen-icon {
+            display: none;
+        }
+        
+        .fullscreen .fullscreen-icon {
+            display: inline;
+        }
+        
+        .fullscreen .no-fullscreen-icon {
+            display: none;
+        }
+        
         nav a::before {
             content: '';
             position: absolute;
@@ -734,6 +750,10 @@
                     <li><a href="#" onclick="showPage('journey')">Mana Prayanam</a></li>
                     <li><a href="#" onclick="showPage('love')">Prema Lekha</a></li>
                     <li><a href="#" onclick="showPage('surprise')">Surprise!</a></li>
+                    <li><a href="#" onclick="toggleFullscreen()">
+                        <i class="fas fa-expand no-fullscreen-icon"></i>
+                        <i class="fas fa-compress fullscreen-icon"></i>
+                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -1197,6 +1217,28 @@
             const colors = ['#FFD700', '#00BFFF', '#BA55D3', '#FF69B4', '#7CFC00'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
+        
+        // Fullscreen toggle function
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Listen for fullscreen change to update button state
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                document.body.classList.add('fullscreen');
+            } else {
+                document.body.classList.remove('fullscreen');
+            }
+        });
         
         // NEW SURPRISE FUNCTIONS ==============
         function revealSurprises() {
